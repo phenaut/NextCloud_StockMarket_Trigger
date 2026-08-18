@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<database>
+    <table>
+        <name>*PREFIX*stockmarket_watchlist</name>
+        <declaration>
+            <field><name>id</name><type>integer</type><default>0</default><notnull>true</notnull><autoincrement>true</autoincrement><length>4</length></field>
+            <field><name>user_id</name><type>text</type><notnull>true</notnull><length>64</length></field>
+            <field><name>isin</name><type>text</type><notnull>true</notnull><length>32</length></field>
+            <field><name>symbol</name><type>text</type><notnull>false</notnull><length>32</length></field>
+            <field><name>label</name><type>text</type><notnull>false</notnull><length>128</length></field>
+            <field><name>low_threshold</name><type>float</type><notnull>false</notnull></field>
+            <field><name>high_threshold</name><type>float</type><notnull>false</notnull></field>
+            <field><name>last_price</name><type>float</type><notnull>false</notnull></field>
+            <field><name>last_alert</name><type>text</type><notnull>false</notnull><length>16</length></field>
+            <field><name>updated_at</name><type>integer</type><default>0</default><notnull>true</notnull><length>4</length></field>
+            <index><name>stockmarket_user_isin</name><unique>true</unique><field><name>user_id</name><sorting>ascending</sorting></field><field><name>isin</name><sorting>ascending</sorting></field></index>
+        </declaration>
+    </table>
+</database>
