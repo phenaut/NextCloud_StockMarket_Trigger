@@ -1,7 +1,7 @@
 <div id="stockmarket-trigger" class="stockmarket-shell">
     <header class="stockmarket-header">
         <div>
-            <p class="eyebrow">MARKET WATCH</p>
+            <p class="eyebrow">Market Watch</p>
             <h1>Mes seuils</h1>
             <p class="subtitle">Les cours sont récupérés auprès de Finnhub toutes les cinq minutes.</p>
         </div>
