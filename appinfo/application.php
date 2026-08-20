@@ -1,5 +1,5 @@
 <?php
-namespace OCA\StockMarketTrigger\AppInfo;
+namespace OCA\Stockmarket_trigger\AppInfo;
 
 use OCP\AppFramework\App;
 

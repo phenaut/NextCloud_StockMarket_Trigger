@@ -1,5 +1,5 @@
 <?php
-namespace OCA\StockMarketTrigger\Service;
+namespace OCA\Stockmarket_trigger\Service;
 
 use OCP\Http\Client\IClientService;
 

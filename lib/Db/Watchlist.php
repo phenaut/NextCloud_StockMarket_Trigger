@@ -1,5 +1,5 @@
 <?php
-namespace OCA\StockMarketTrigger\Db;
+namespace OCA\Stockmarket_trigger\Db;
 
 use OCP\AppFramework\Db\Entity;
 
