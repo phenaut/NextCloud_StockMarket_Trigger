@@ -2,6 +2,8 @@
 namespace OCA\Stockmarket_trigger\Controller;
 
 use OCP\AppFramework\Controller;
+use OCP\AppFramework\Http\Attribute\NoAdminRequired;
+use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
 use OCP\AppFramework\Http\TemplateResponse;
 use OCP\IRequest;
 use OCP\Util;
@@ -16,6 +18,8 @@ class PageController extends Controller {
 * @NoCSRFRequired
 */
 
+	#[NoAdminRequired]
+	#[NoCSRFRequired]
 	public function index(): TemplateResponse {
 	Util::addScript($this->appName, 'app');
 	Util::addStyle($this->appName, 'app');

@@ -2,6 +2,8 @@
 namespace OCA\Stockmarket_trigger\Controller;
 
 use OCP\AppFramework\Controller;
+use OCP\AppFramework\Http\Attribute\NoAdminRequired;
+use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IConfig;
 use OCP\IRequest;
@@ -16,6 +18,8 @@ class SettingsController extends Controller {
      * @NoAdminRequired
      * @NoCSRFRequired
      */
+    #[NoAdminRequired]
+    #[NoCSRFRequired]
     public function get(): JSONResponse {
         return new JSONResponse(['configured' => $this->key() !== '']);
     }
@@ -24,6 +28,8 @@ class SettingsController extends Controller {
      * @NoAdminRequired
      * @NoCSRFRequired
      */
+    #[NoAdminRequired]
+    #[NoCSRFRequired]
     public function save(string $apiKey = ''): JSONResponse {
         $apiKey = trim($apiKey);
         if ($apiKey === '') return new JSONResponse(['error' => 'La clé Finnhub est obligatoire.'], 400);

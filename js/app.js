@@ -8,7 +8,7 @@
     var endpoint = function (path) { return OC.generateUrl('/apps/stockmarket_trigger' + path); };
     var request = function (path, options) {
         options = options || {};
-        options.headers = Object.assign({'requesttoken': OC.requestToken, 'Content-Type': 'application/x-www-form-urlencoded'}, options.headers || {});
+        options.headers = Object.assign({'Content-Type': 'application/x-www-form-urlencoded'}, options.headers || {});
         return fetch(endpoint(path), options).then(function (response) { return response.json().then(function (data) { if (!response.ok) throw new Error(data.error || 'Erreur serveur'); return data; }); });
     };
     var value = function (number) { return number === null || number === undefined ? '-' : Number(number).toLocaleString(undefined, {maximumFractionDigits: 4}); };

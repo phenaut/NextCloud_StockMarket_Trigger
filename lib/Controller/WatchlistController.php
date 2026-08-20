@@ -6,6 +6,8 @@ use OCA\Stockmarket_trigger\Db\Watchlist;
 use OCA\Stockmarket_trigger\Db\WatchlistMapper;
 use OCA\Stockmarket_trigger\Service\FinnhubService;
 use OCP\AppFramework\Controller;
+use OCP\AppFramework\Http\Attribute\NoAdminRequired;
+use OCP\AppFramework\Http\Attribute\NoCSRFRequired;
 use OCP\AppFramework\Http\JSONResponse;
 use OCP\IConfig;
 use OCP\IRequest;
@@ -23,12 +25,22 @@ class WatchlistController extends Controller {
         parent::__construct($appName, $request);
     }
 
-    /** @NoAdminRequired @NoCSRFRequired */
+    /**
+     * @NoAdminRequired
+     * @NoCSRFRequired
+     */
+    #[NoAdminRequired]
+    #[NoCSRFRequired]
     public function index(): JSONResponse {
         return new JSONResponse($this->mapper->findForUser($this->userId()));
     }
 
-    /** @NoAdminRequired */
+    /**
+     * @NoAdminRequired
+     * @NoCSRFRequired
+     */
+    #[NoAdminRequired]
+    #[NoCSRFRequired]
     public function create(string $isin, string $label = '', string $symbol = '', ?float $lowThreshold = null, ?float $highThreshold = null): JSONResponse {
         $isin = strtoupper(trim($isin));
         $error = $this->validate($isin, $lowThreshold, $highThreshold);
@@ -49,7 +61,12 @@ class WatchlistController extends Controller {
         }
     }
 
-    /** @NoAdminRequired */
+    /**
+     * @NoAdminRequired
+     * @NoCSRFRequired
+     */
+    #[NoAdminRequired]
+    #[NoCSRFRequired]
     public function update(int $id, string $isin, string $label = '', string $symbol = '', ?float $lowThreshold = null, ?float $highThreshold = null): JSONResponse {
         $isin = strtoupper(trim($isin));
         $error = $this->validate($isin, $lowThreshold, $highThreshold);
@@ -68,7 +85,12 @@ class WatchlistController extends Controller {
         return new JSONResponse($this->mapper->update($watchlist));
     }
 
-    /** @NoAdminRequired */
+    /**
+     * @NoAdminRequired
+     * @NoCSRFRequired
+     */
+    #[NoAdminRequired]
+    #[NoCSRFRequired]
     public function destroy(int $id): JSONResponse {
         try {
             $watchlist = $this->mapper->findForUserById($this->userId(), $id);
@@ -79,7 +101,12 @@ class WatchlistController extends Controller {
         return new JSONResponse([], 204);
     }
 
-    /** @NoAdminRequired @NoCSRFRequired */
+    /**
+     * @NoAdminRequired
+     * @NoCSRFRequired
+     */
+    #[NoAdminRequired]
+    #[NoCSRFRequired]
     public function quotes(): JSONResponse {
         $apiKey = $this->config->getUserValue($this->userId(), $this->appName, 'finnhub_api_key', '');
         if ($apiKey === '') return new JSONResponse(['error' => 'Configurez votre clé Finnhub avant de récupérer les cours.'], 400);
