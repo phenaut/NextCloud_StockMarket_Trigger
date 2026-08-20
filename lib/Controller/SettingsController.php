@@ -1,5 +1,5 @@
 <?php
-namespace OCA\StockMarketTrigger\Controller;
+namespace OCA\Stockmarket_trigger\Controller;
 
 use OCP\AppFramework\Controller;
 use OCP\AppFramework\Http\JSONResponse;
@@ -12,10 +12,18 @@ class SettingsController extends Controller {
         parent::__construct($appName, $request);
     }
 
+    /**
+     * @NoAdminRequired
+     * @NoCSRFRequired
+     */
     public function get(): JSONResponse {
         return new JSONResponse(['configured' => $this->key() !== '']);
     }
 
+    /**
+     * @NoAdminRequired
+     * @NoCSRFRequired
+     */
     public function save(string $apiKey = ''): JSONResponse {
         $apiKey = trim($apiKey);
         if ($apiKey === '') return new JSONResponse(['error' => 'La clé Finnhub est obligatoire.'], 400);
