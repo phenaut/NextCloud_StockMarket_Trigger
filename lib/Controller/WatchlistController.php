@@ -32,7 +32,7 @@ class WatchlistController extends Controller {
     #[NoAdminRequired]
     #[NoCSRFRequired]
     public function index(): JSONResponse {
-        return new JSONResponse($this->mapper->findForUser($this->userId()));
+        return new JSONResponse(array_map([$this, 'serializeWatchlist'], $this->mapper->findForUser($this->userId())));
     }
 
     /**
@@ -55,7 +55,7 @@ class WatchlistController extends Controller {
         $watchlist->setHighThreshold($highThreshold);
         $watchlist->setUpdatedAt(time());
         try {
-            return new JSONResponse($this->mapper->insert($watchlist), 201);
+            return new JSONResponse($this->serializeWatchlist($this->mapper->insert($watchlist)), 201);
         } catch (\Throwable $exception) {
             return new JSONResponse(['error' => 'Cet ISIN est déjà surveillé ou ne peut pas être enregistré.'], 409);
         }
@@ -142,6 +142,19 @@ class WatchlistController extends Controller {
         if ($watchlist->getLowThreshold() !== null && $price <= $watchlist->getLowThreshold()) return 'low';
         if ($watchlist->getHighThreshold() !== null && $price >= $watchlist->getHighThreshold()) return 'high';
         return null;
+    }
+
+    private function serializeWatchlist(Watchlist $watchlist): array {
+        return [
+            'id' => $watchlist->getId(),
+            'isin' => $watchlist->getIsin(),
+            'label' => $watchlist->getLabel(),
+            'symbol' => $watchlist->getSymbol(),
+            'lowThreshold' => $watchlist->getLowThreshold(),
+            'highThreshold' => $watchlist->getHighThreshold(),
+            'lastPrice' => $watchlist->getLastPrice(),
+            'lastAlert' => $watchlist->getLastAlert(),
+        ];
     }
 
     private function validate(string $isin, ?float $lowThreshold, ?float $highThreshold): ?string {

@@ -23,7 +23,7 @@
 
     <main class="watchlist-panel">
         <div class="panel-heading">
-            <div><h2>Actions surveillées</h2><span id="last-check">Pas encore vérifié</span></div>
+            <div><h2>Actions surveillées</h2><span id="last-check">Pas encore vérifié</span><span id="finnhub-status" class="finnhub-status" title="Finnhub n’a pas encore été contacté" aria-label="Finnhub n’a pas encore été contacté"></span></div>
             <button id="refresh-quotes" class="secondary-button" type="button">Actualiser les cours</button>
         </div>
         <form id="watch-form" class="watch-form">
